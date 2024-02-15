@@ -2,8 +2,9 @@
 // import { Link } from "@nextui-org/link";
 import { button as buttonStyles } from "@nextui-org/theme";
 import { title, subtitle } from "@/components/primitives";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import data from '../components/data.json';
+import { getRandomQuestion } from '../components/questions';
 // import {Input} from "@nextui-org/input";
 import { Card, CardHeader, CardBody, Divider, Link, Image, Button, Input, Avatar } from '@nextui-org/react';
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -21,6 +22,8 @@ export default function Home() {
 	const [passes, setPasses] = useState<number[]>(Array(playerNames.length).fill(1));
     const [skips, setSkips] = useState<number[]>(Array(playerNames.length).fill(2));
 	const [showWarning, setShowWarning] = useState<boolean>(false);
+	const [showAlert, setShowAlert] = useState(false);
+
 
 
 	const addPlayer = () => {
@@ -49,10 +52,26 @@ export default function Home() {
 		setSkips(updatedSkips);
 	};
 
+	// const getRandomString = () => {
+	//   const randomIndex = Math.floor(Math.random() * data.length);
+	//   setRandomString(data[randomIndex]);
+	// };
+
 	const getRandomString = () => {
-	  const randomIndex = Math.floor(Math.random() * data.length);
-	  setRandomString(data[randomIndex]);
-	};
+        // const question = getRandomQuestion();
+        // setRandomString(question || '');
+		const question = getRandomQuestion();
+        if (!question) {
+            setShowAlert(true); 
+			setTimeout(() => {
+				exitGame();
+				setShowAlert(false);
+			}, 3000);
+			return;
+        } else {
+            setRandomString(question || '');
+        }
+    };
 
 	const playRound = () => {
 		if (playerNames.length < 2) {
@@ -228,6 +247,61 @@ export default function Home() {
 					</Button>
 				)}
 			</div>
+			{showAlert && (
+				<div className="fixed inset-0 flex items-end justify-center px-4 py-6 pointer-events-none sm:p-6 sm:items-start sm:justify-end"style={{zIndex: "99"}}>
+				<div className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto">
+					<div className="rounded-lg shadow-xs overflow-hidden">
+					<div className="p-4">
+						<div className="flex items-start">
+						<div className="flex-shrink-0">
+							<svg
+							className="h-6 w-6 text-green-400"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							aria-hidden="true"
+							>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth="2"
+								d="M5 13l4 4L19 7"
+							/>
+							</svg>
+						</div>
+						<div className="ml-3 w-0 flex-1 pt-0.5">
+							<p className="text-sm font-medium text-gray-900">
+							Thank you for playing!
+							</p>
+						</div>
+						<div className="ml-4 flex-shrink-0 flex">
+							<button
+							onClick={() => setShowAlert(false)}
+							className="inline-flex text-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+							>
+							<span className="sr-only">Close</span>
+							<svg
+								className="h-5 w-5"
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 20 20"
+								fill="currentColor"
+								aria-hidden="true"
+							>
+								<path
+								fillRule="evenodd"
+								d="M14.293 5.293a1 1 0 011.414 0l5 5a1 1 0 01-1.414 1.414l-5-5a1 1 0 010-1.414zM5.707 14.293a1 1 0 010-1.414l5-5a1 1 0 011.414 0l5 5a1 1 0 01-1.414 1.414l-5-5a1 1 0 01-1.414 0z"
+								clipRule="evenodd"
+								/>
+							</svg>
+							</button>
+						</div>
+						</div>
+					</div>
+					</div>
+				</div>
+				</div>
+			)}
 		</section>
 		
 	);
