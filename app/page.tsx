@@ -302,6 +302,9 @@ export default function Home() {
 				</div>
 				</div>
 			)}
+			<footer style={{ position: 'fixed', bottom: 0, left: 0, width: '100%', textAlign: 'center', padding: '10px 0' }}>
+				&copy; 2024 Developed by Vansh Gulati
+			</footer>
 		</section>
 		
 	);
