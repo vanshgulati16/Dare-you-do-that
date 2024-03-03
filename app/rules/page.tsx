@@ -9,8 +9,10 @@ export default function AboutPage() {
 			</div>
 			<Card className="mt-6">
 				<CardBody>
-					<p className={subtitle()}>Rules are simple, there are {" "}<span style={{ color: "yellow", fontWeight: "bold" }}>2 skips</span>{" "} and {" "}<span style={{ color: "yellow", fontWeight: "bold" }}>1 pass</span>{" "} available for all the Players, rest be{" "}<span style={{ color: "purple", fontWeight: "bold" }}>naughty</span>{" "}😈 and enjoy!!!!</p>
-					<p style={{ textAlign: "center", fontSize: "2rem" }}>😏 🍆 🍑 💦</p>
+					<p className={subtitle()}>Rules are simple, there are {" "}<span style={{ color: "yellow", fontWeight: "bold" }}>2 skips*</span>{" "} and {" "}<span style={{ color: "yellow", fontWeight: "bold" }}>1 pass*</span>{" "} available for all the Players, rest be{" "}<span style={{ color: "purple", fontWeight: "bold" }}>naughty</span>{" "}😈 and enjoy!!!!</p>
+					<br />
+					<p className={subtitle()}>{" "}<span style={{ color: "yellow", fontWeight: "bold" }}>Skip: </span>{" "} Skip the question </p>
+					<p className={subtitle()}>{" "}<span style={{ color: "yellow", fontWeight: "bold" }}>Pass: </span>{" "} Pass on the question to other person</p>
 				</CardBody>
 			</Card>
 		</>

@@ -1,6 +1,5 @@
 import data from './data.json';
 
-// Define the questions arrays
 let usedQuestions: string[] = [];
 let remainingQuestions: string[] = [];
 
@@ -26,5 +25,4 @@ export function getRandomQuestion(): string | undefined {
     return question;
 }
 
-// Initialize remaining questions from data.json
 initializeRemainingQuestions();
